@@ -1,4 +1,4 @@
-# Android_UXEample
+# Android50AS_UXEample
 UXTesting Android Example Pject
 <br>
 
@@ -16,7 +16,6 @@ UXTesting Android Example Pject
 	}
 
 	dependencies {
-	    compile 'org.bytedeco:javacv:0.11'
 	    compile (name:'uxtestingsdk', ext:'aar')
 	}
 	```
@@ -43,28 +42,23 @@ UXTesting Android Example Pject
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-feature android:name="android.hardware.camera"  android:required="false" />
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
     <uses-feature android:name="android.hardware.camera.front" android:required="false" />
 	```
 
-5. Add `UXTService` to `AndroidManifest.xml`
+5. Add `UXTestingService` to `AndroidManifest.xml`
 	```xml
 	<service android:enabled="true" android:name="io.uxtesting.UXTestingService" />
 	```
 
-6. (Optional) If you have to support version below API 14, add following code in every Activity
+6. Call this method in onActivityResult method of every Activity which will start screen record.
 	```java
 	@Override
-	public void onResume() {
-	    super.onResume();
-	    UXTesting.onResume(this);
-	}
-
-	@Override
-	public void onPause() {
-	    super.onPause();
-	    UXTesting.onPause();
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UXTesting.onActivityResult(requestCode, resultCode, data);
 	}
 	```
 
